@@ -282,7 +282,7 @@ const bannerImg = await loadImage("./banner.png");
       const row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId("originales")
-          .setLabel("📂 Originales")
+          .setLabel("📥")
           .setStyle(ButtonStyle.Secondary)
       );
 
@@ -521,15 +521,6 @@ client.on("interactionCreate", async (interaction) => {
 
     return interaction.reply({
       content: "No encontrado",
-      ephemeral: true
-    });
-
-  }
-
-  if (interaction.user.id !== data.userId) {
-
-    return interaction.reply({
-      content: "No puedes usar esto",
       ephemeral: true
     });
 
