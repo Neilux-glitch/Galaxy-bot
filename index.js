@@ -282,21 +282,19 @@ client.on("messageCreate", async (message) => {
 
   const attachments = [...message.attachments.values()];
 
-  if (attachments.length === 0) return;
+if (attachments.length === 0) return;
 
-  if (!attachments.every(validImage)) {
-    return message.reply(
-      "Solo imágenes PNG/JPG/WEBP 😭"
-    );
-  }
+const imageAttachments =
+  attachments.filter(validImage);
 
+if (imageAttachments.length === 0) return;
   // =====================================================
   // 🔥 BOY PROFILE
   // =====================================================
 
   if (PROFILE_CHANNELS.includes(message.channel.id)) {
 
-    if (attachments.length < 2) {
+    if (imageAttachments.length < 2) {
       return message.reply(
         "Envía:\n1 avatar\n1 banner"
       );
@@ -304,8 +302,8 @@ client.on("messageCreate", async (message) => {
 
     try {
 
-      const avatar = attachments[0].url;
-      const banner = attachments[1].url;
+      const avatar = imageAttachments[0].url;
+      const banner = imageAttachments[1].url;
 
 await download(avatar, "./avatar.png");
 await download(banner, "./banner.png");
@@ -457,7 +455,7 @@ ctx.restore();
 
 if (message.channel.id === MATCHING_CHANNEL_ID) {
 
-  if (attachments.length < 3) {
+  if (imageAttachments.length < 3) {
     return message.reply(
       "Envía:\n1 avatar\n1 avatar\n1 banner"
     );
@@ -465,9 +463,9 @@ if (message.channel.id === MATCHING_CHANNEL_ID) {
 
   try {
 
-    const avatar1 = attachments[0].url;
-    const avatar2 = attachments[1].url;
-    const banner = attachments[2].url;
+    const avatar1 = imageAttachments[0].url;
+    const avatar2 = imageAttachments[1].url;
+    const banner = imageAttachments[2].url;
 
     // =========================
     // DESCARGAR
