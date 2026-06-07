@@ -256,7 +256,7 @@ const bannerImg = await loadImage("./banner.png");
 
       // fondo blur
       ctx.filter = "blur(12px)";
-      ctx.drawImage(bannerImg, -20, -20, 940, 540);
+      drawCover(ctx, bannerImg, -20, -20, 940, 540);
       ctx.filter = "none";
 
       ctx.fillStyle = "rgba(0,0,0,0.35)";
