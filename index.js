@@ -228,11 +228,12 @@ function validImage(att) {
   const url = att.url.toLowerCase().split("?")[0];
 
   return (
-    url.endsWith(".png") ||
-    url.endsWith(".jpg") ||
-    url.endsWith(".jpeg") ||
-    url.endsWith(".webp")
-  );
+  url.endsWith(".png") ||
+  url.endsWith(".jpg") ||
+  url.endsWith(".jpeg") ||
+  url.endsWith(".webp") ||
+  url.endsWith(".gif")
+);
 
 }
 
