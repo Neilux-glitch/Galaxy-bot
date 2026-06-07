@@ -268,7 +268,7 @@ const bannerImg = await loadImage("./banner.png");
       ctx.save();
       ctx.clip();
 
-      ctx.drawImage(bannerImg, 110, 35, 770, 300);
+      drawCover(ctx, bannerImg, 110, 35, 770, 300);
 
       ctx.restore();
 
@@ -431,7 +431,7 @@ const neon3 =
 
     // fondo blur
     ctx.filter = "blur(12px)";
-    ctx.drawImage(bannerImg, -20, -20, 940, 540);
+    drawCover(ctx, bannerImg, -20, -20, 940, 540);
     ctx.filter = "none";
 
     ctx.fillStyle = "rgba(0,0,0,0.40)";
@@ -446,7 +446,7 @@ const neon3 =
     ctx.save();
     ctx.clip();
 
-    ctx.drawImage(bannerImg, 90, 35, 720, 240);
+    drawCover(ctx, bannerImg, 90, 35, 720, 240);
 
     ctx.restore();
 
