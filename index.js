@@ -298,14 +298,11 @@ const bannerImg = await loadImage("./banner.png");
       ctx.fillRect(0, 0, 900, 500);
 
       // banner
-      roundRect(ctx, 110, 35, 770, 300, 35);
+roundRect(ctx, 110, 35, 770, 300, 35);
 
-      ctx.save();
-      ctx.clip();
+drawCover(ctx, bannerImg, 110, 35, 770, 300);
 
-      drawCover(ctx, bannerImg, 110, 35, 770, 300);
-
-      ctx.restore();
+ctx.restore();
 
       // glow banner
       ctx.strokeStyle = neon2;
