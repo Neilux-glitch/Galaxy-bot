@@ -92,6 +92,42 @@ client.once("ready", () => {
 
 function roundRect(ctx, x, y, w, h, r) {
 
+  function drawCover(ctx, img, x, y, w, h) {
+
+  const imgRatio = img.width / img.height;
+  const boxRatio = w / h;
+
+  let drawWidth;
+  let drawHeight;
+  let offsetX = 0;
+  let offsetY = 0;
+
+  if (imgRatio > boxRatio) {
+
+    drawHeight = h;
+    drawWidth = h * imgRatio;
+
+    offsetX = (drawWidth - w) / 2;
+
+  } else {
+
+    drawWidth = w;
+    drawHeight = w / imgRatio;
+
+    offsetY = (drawHeight - h) / 2;
+
+  }
+
+  ctx.drawImage(
+    img,
+    x - offsetX,
+    y - offsetY,
+    drawWidth,
+    drawHeight
+  );
+
+}
+
   ctx.beginPath();
 
   ctx.moveTo(x + r, y);
