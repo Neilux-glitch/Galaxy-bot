@@ -92,6 +92,41 @@ client.once("ready", () => {
 
 function roundRect(ctx, x, y, w, h, r) {
 
+  function drawCoverCircle(ctx, img, x, y, size) {
+
+  const imgRatio = img.width / img.height;
+
+  let drawWidth;
+  let drawHeight;
+  let offsetX = 0;
+  let offsetY = 0;
+
+  if (imgRatio > 1) {
+
+    drawHeight = size;
+    drawWidth = size * imgRatio;
+
+    offsetX = (drawWidth - size) / 2;
+
+  } else {
+
+    drawWidth = size;
+    drawHeight = size / imgRatio;
+
+    offsetY = (drawHeight - size) / 2;
+
+  }
+
+  ctx.drawImage(
+    img,
+    x - offsetX,
+    y - offsetY,
+    drawWidth,
+    drawHeight
+  );
+
+}
+
   function drawCover(ctx, img, x, y, w, h) {
 
   const imgRatio = img.width / img.height;
@@ -302,7 +337,7 @@ const bannerImg = await loadImage("./banner.png");
 
       ctx.clip();
 
-      ctx.drawImage(avatarImg, 85, 235, 230, 230);
+      drawCoverCircle(ctx, avatarImg, 85, 235, 230, 230);
 
       ctx.restore();
 
@@ -471,7 +506,7 @@ const neon3 =
 
     ctx.clip();
 
-    ctx.drawImage(avatar1Img, 150, 220, 200, 200);
+    drawCoverCircle(ctx, avatarImg, 150, 220, 200, 200);
 
     ctx.restore();
 
@@ -497,7 +532,7 @@ const neon3 =
 
     ctx.clip();
 
-    ctx.drawImage(avatar2Img, 550, 220, 200, 200);
+    drawCoverCircle(ctx, avatarImg, 550, 220, 200, 200);
 
     ctx.restore();
 
