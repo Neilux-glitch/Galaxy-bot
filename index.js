@@ -298,8 +298,6 @@ const bannerImg = await loadImage("./banner.png");
       ctx.fillRect(0, 0, 900, 500);
 
       // banner
-roundRect(ctx, 110, 35, 770, 300, 35);
-
 drawCover(ctx, bannerImg, 110, 35, 770, 300);
 
 ctx.restore();
