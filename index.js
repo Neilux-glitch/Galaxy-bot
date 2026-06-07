@@ -80,7 +80,7 @@ function download(url, path) {
 // READY
 // =====================================================
 
-client.once("clientready", () => {
+client.once("clientReady", () => {
 
   console.log(`🟢 Conectado como ${client.user.tag}`);
 
@@ -91,43 +91,28 @@ client.once("clientready", () => {
 // =====================================================
 
 function roundRect(ctx, x, y, w, h, r) {
+  
+  ctx.beginPath();
 
-  function drawCoverCircle(ctx, img, x, y, size) {
+  ctx.moveTo(x + r, y);
 
-  const imgRatio = img.width / img.height;
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
 
-  let drawWidth;
-  let drawHeight;
-  let offsetX = 0;
-  let offsetY = 0;
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
 
-  if (imgRatio > 1) {
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
 
-    drawHeight = size;
-    drawWidth = size * imgRatio;
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
 
-    offsetX = (drawWidth - size) / 2;
-
-  } else {
-
-    drawWidth = size;
-    drawHeight = size / imgRatio;
-
-    offsetY = (drawHeight - size) / 2;
-
-  }
-
-  ctx.drawImage(
-    img,
-    x - offsetX,
-    y - offsetY,
-    drawWidth,
-    drawHeight
-  );
+  ctx.closePath();
 
 }
 
-  function drawCover(ctx, img, x, y, w, h) {
+function drawCover(ctx, img, x, y, w, h) {
 
   const imgRatio = img.width / img.height;
   const boxRatio = w / h;
@@ -163,23 +148,38 @@ function roundRect(ctx, x, y, w, h, r) {
 
 }
 
-  ctx.beginPath();
+function drawCoverCircle(ctx, img, x, y, size) {
 
-  ctx.moveTo(x + r, y);
+  const imgRatio = img.width / img.height;
 
-  ctx.lineTo(x + w - r, y);
-  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  let drawWidth;
+  let drawHeight;
+  let offsetX = 0;
+  let offsetY = 0;
 
-  ctx.lineTo(x + w, y + h - r);
-  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  if (imgRatio > 1) {
 
-  ctx.lineTo(x + r, y + h);
-  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+    drawHeight = size;
+    drawWidth = size * imgRatio;
 
-  ctx.lineTo(x, y + r);
-  ctx.quadraticCurveTo(x, y, x + r, y);
+    offsetX = (drawWidth - size) / 2;
 
-  ctx.closePath();
+  } else {
+
+    drawWidth = size;
+    drawHeight = size / imgRatio;
+
+    offsetY = (drawHeight - size) / 2;
+
+  }
+
+  ctx.drawImage(
+    img,
+    x - offsetX,
+    y - offsetY,
+    drawWidth,
+    drawHeight
+  );
 
 }
 
@@ -334,6 +334,11 @@ const bannerImg = await loadImage("./banner.png");
       ctx.fillRect(0, 0, 900, 500);
 
       // banner
+ctx.save();
+
+roundRect(ctx, 110, 35, 770, 300, 35);
+ctx.clip();
+
 drawCover(ctx, bannerImg, 110, 35, 770, 300);
 
 ctx.restore();
@@ -497,7 +502,7 @@ const neon3 =
 
     // fondo blur
     ctx.filter = "blur(12px)";
-    drawCover(ctx, bannerImg, -20, -20, 940, 540);
+    ctx. drawImage(bannerImg, -20, -20, 940, 540);
     ctx.filter = "none";
 
     ctx.fillStyle = "rgba(0,0,0,0.40)";
@@ -537,7 +542,7 @@ const neon3 =
 
     ctx.clip();
 
-    drawCoverCircle(ctx, avatarImg, 150, 220, 200, 200);
+    drawCoverCircle(ctx, avatar1Img, 150, 220, 200);
 
     ctx.restore();
 
@@ -563,7 +568,7 @@ const neon3 =
 
     ctx.clip();
 
-    drawCoverCircle(ctx, avatarImg, 550, 220, 200, 200);
+    drawCoverCircle(ctx, avatar2Img, 550, 220, 200);
 
     ctx.restore();
 
